@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>
+  <mat-icon>event_note</mat-icon>
+  {{ isEditMode ? 'Edit Note' : 'New Note' }} - {{ data.date }}
+</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="title" placeholder="Enter note title" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Content</mat-label>
+    <textarea matInput 
+              [(ngModel)]="content" 
+              placeholder="Enter note content"
+              rows="10"
+              required></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button 
+          color="warn" 
+          *ngIf="isEditMode" 
+          (click)="delete()">
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+  <button mat-raised-button 
+          color="primary" 
+          (click)="save()"
+          [disabled]="!title || !content">
+    <mat-icon>save</mat-icon>
+    Save
+  </button>
+</mat-dialog-actions>

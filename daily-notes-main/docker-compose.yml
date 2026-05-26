@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dailynotes-postgres
+    environment:
+      POSTGRES_DB: dailynotes
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - dailynotes-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dailynotes-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: dailynotes
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: yourSecretKeyForJWTTokenGenerationMustBeLongEnough1234567890
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dailynotes-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/auth/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dailynotes-frontend
+    ports:
+      - "8088:80"
+    depends_on:
+      - backend
+    networks:
+      - dailynotes-network
+
+networks:
+  dailynotes-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
