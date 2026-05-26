@@ -2,13 +2,19 @@ h2[mat-dialog-title] {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #667eea;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: var(--gradient-text-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   margin-bottom: 20px;
 }
 
 mat-dialog-content {
   min-width: 500px;
   padding: 20px 0;
+  color: var(--text-body);
 }
 
 .full-width {
@@ -16,10 +22,22 @@ mat-dialog-content {
   margin-bottom: 16px;
 }
 
+::ng-deep .full-width {
+  .mat-mdc-form-field-label,
+  .mdc-floating-label {
+    color: var(--text-muted);
+  }
+
+  &.mat-focused .mat-mdc-form-field-label,
+  &.mat-focused .mdc-floating-label {
+    color: var(--text-accent);
+  }
+}
+
 mat-dialog-actions {
   padding: 16px 0;
   gap: 8px;
-  
+
   button {
     display: flex;
     align-items: center;
@@ -28,5 +46,6 @@ mat-dialog-actions {
 }
 
 button[color="primary"] {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--text-on-primary);
+  background: var(--gradient-primary);
 }

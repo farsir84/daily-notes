@@ -1,5 +1,55 @@
 @import '@angular/material/prebuilt-themes/azure-blue.css';
 
+:root {
+  /* Brand gradients */
+  --color-primary-start: #4f46e5;
+  --color-primary-mid: #7c3aed;
+  --color-primary-end: #a855f7;
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary-start) 0%,
+    var(--color-primary-mid) 52%,
+    var(--color-primary-end) 100%
+  );
+  --gradient-primary-hover: linear-gradient(
+    135deg,
+    #4338ca 0%,
+    #6d28d9 52%,
+    #9333ea 100%
+  );
+  --gradient-bg: linear-gradient(
+    155deg,
+    #1e1b4b 0%,
+    #312e81 38%,
+    #5b21b6 72%,
+    #7c3aed 100%
+  );
+  --gradient-text-heading: linear-gradient(
+    120deg,
+    var(--color-primary-start) 0%,
+    var(--color-primary-mid) 45%,
+    #c026d3 100%
+  );
+
+  /* Typography */
+  --text-on-primary: #f8fafc;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-accent: #7c3aed;
+
+  /* Surfaces */
+  --surface-glass: rgba(255, 255, 255, 0.94);
+  --surface-calendar: #ffffff;
+
+  /* Semantic */
+  --color-error: #e11d48;
+  --color-error-bg: #fff1f2;
+
+  /* Interactive tints */
+  --tint-primary-05: rgba(99, 102, 241, 0.06);
+  --tint-primary-10: rgba(99, 102, 241, 0.12);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,9 +59,18 @@
 html, body {
   height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--text-body);
 }
 
 body {
   margin: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-bg);
+}
+
+/* Shared gradient heading treatment */
+.gradient-heading {
+  background: var(--gradient-text-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

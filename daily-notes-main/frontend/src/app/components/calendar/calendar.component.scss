@@ -5,8 +5,9 @@
 }
 
 .toolbar {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 12px rgba(30, 27, 75, 0.25);
+  background: var(--gradient-primary);
+  color: var(--text-on-primary);
 }
 
 .toolbar-title {
@@ -15,6 +16,9 @@
   gap: 8px;
   font-size: 20px;
   font-weight: 500;
+  color: var(--text-on-primary);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(15, 23, 42, 0.2);
 }
 
 .toolbar-spacer {
@@ -25,54 +29,72 @@
   flex: 1;
   padding: 20px;
   overflow: auto;
-  background: rgba(255, 255, 255, 0.95);
-  
+  background: var(--surface-glass);
+
   ::ng-deep {
     .fc {
-      background: white;
+      background: var(--surface-calendar);
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      color: var(--text-body);
     }
 
     .fc-toolbar-title {
       font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: var(--gradient-text-heading);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .fc-col-header-cell-cushion,
+    .fc-daygrid-day-number {
+      color: var(--text-muted);
       font-weight: 500;
-      color: #333;
     }
 
     .fc-button-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--text-on-primary);
+      background: var(--gradient-primary);
       border: none;
-      
+
       &:hover {
-        background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+        background: var(--gradient-primary-hover);
       }
-      
+
       &:disabled {
         opacity: 0.6;
       }
     }
 
     .fc-event {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--text-on-primary);
+      background: var(--gradient-primary);
       border: none;
       cursor: pointer;
       padding: 4px 8px;
       border-radius: 4px;
-      
+
       &:hover {
-        background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+        background: var(--gradient-primary-hover);
       }
     }
 
     .fc-daygrid-day:hover {
-      background: rgba(102, 126, 234, 0.05);
+      background: var(--tint-primary-05);
       cursor: pointer;
     }
 
     .fc-day-today {
-      background: rgba(102, 126, 234, 0.1) !important;
+      background: var(--tint-primary-10) !important;
+
+      .fc-daygrid-day-number {
+        color: var(--text-accent);
+        font-weight: 600;
+      }
     }
   }
 }
